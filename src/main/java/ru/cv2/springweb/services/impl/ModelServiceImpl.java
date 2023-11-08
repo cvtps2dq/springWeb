@@ -43,9 +43,9 @@ public class ModelServiceImpl implements ModelService {
             throw new IllegalArgumentException("No model found with this UUID!");
     }
     @Override
-    public ModelDTO getModelByName(ModelDTO model) {
+    public ModelDTO getModelByName(String name) {
 
-        return modelMapper.toDTO(modelRepository.findModelByName(model.getName()));
+        return modelMapper.toDTO(modelRepository.findModelByName(name));
     }
     @Override
     public ModelDTO saveModel(ModelDTO model) {
