@@ -5,23 +5,15 @@ import ru.cv2.springweb.models.enums.Role;
 import java.util.UUID;
 public class UserRoleDTO {
 
-    private UUID uuid;
     private Role role;
+    private UUID id;
 
-    private UserRoleDTO(UUID uuid, Role role) {
-        this.uuid = uuid;
+    private UserRoleDTO(UUID id, Role role) {
         this.role = role;
+        this.id = id;
     }
 
     public UserRoleDTO() {
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public Role getRole() {
@@ -30,5 +22,13 @@ public class UserRoleDTO {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

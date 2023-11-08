@@ -6,38 +6,16 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class ModelDTO {
-    private UUID uuid;
     private String name;
-
     private Category category;
     private String imageUrl;
     private Integer startYear;
     private Integer endYear;
-    private LocalDateTime created;
-    private LocalDateTime modified;
     private BrandDTO brand;
 
-    private ModelDTO(UUID uuid, String name, Category category, String imageUrl, Integer startYear, Integer endYear, LocalDateTime created, LocalDateTime modified, BrandDTO brand) {
-        this.uuid = uuid;
-        this.name = name;
-        this.category = category;
-        this.imageUrl = imageUrl;
-        this.startYear = startYear;
-        this.endYear = endYear;
-        this.created = created;
-        this.modified = modified;
-        this.brand = brand;
-    }
+    private UUID id;
 
     public ModelDTO() {
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getName() {
@@ -80,27 +58,29 @@ public class ModelDTO {
         this.endYear = endYear;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
     public BrandDTO getBrand() {
         return brand;
     }
 
     public void setBrand(BrandDTO brand) {
         this.brand = brand;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    private ModelDTO(String name, Category category, String imageUrl, Integer startYear, Integer endYear, BrandDTO brand, UUID id) {
+        this.name = name;
+        this.category = category;
+        this.imageUrl = imageUrl;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.brand = brand;
+        this.id = id;
     }
 }

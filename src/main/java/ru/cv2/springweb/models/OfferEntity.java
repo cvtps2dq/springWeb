@@ -1,19 +1,13 @@
 package ru.cv2.springweb.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import ru.cv2.springweb.models.abstracts.BaseCMEntity;
+import ru.cv2.springweb.models.abstracts.BaseEntity;
 import ru.cv2.springweb.models.enums.Engine;
 import ru.cv2.springweb.models.enums.Transmission;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Entity
-public class OfferEntity {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+public class OfferEntity extends BaseCMEntity {
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -25,8 +19,6 @@ public class OfferEntity {
     @Enumerated(EnumType.STRING)
     private Transmission transmission;
     private Integer year;
-    private LocalDateTime created;
-    private LocalDateTime modified;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="model_id")
     private ModelEntity model;
@@ -34,8 +26,7 @@ public class OfferEntity {
     @JoinColumn(name="selled_id")
     private UserEntity seller;
 
-    private OfferEntity(UUID uuid, String description, Engine engine, String imageUrl, Integer mileage, Float price, Transmission transmission, Integer year, LocalDateTime created, LocalDateTime modified, ModelEntity model, UserEntity seller) {
-        this.uuid = uuid;
+    private OfferEntity(String description, Engine engine, String imageUrl, Integer mileage, Float price, Transmission transmission, Integer year, ModelEntity model, UserEntity seller) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -43,21 +34,11 @@ public class OfferEntity {
         this.price = price;
         this.transmission = transmission;
         this.year = year;
-        this.created = created;
-        this.modified = modified;
         this.model = model;
         this.seller = seller;
     }
 
     public OfferEntity() {
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getDescription() {
@@ -114,22 +95,6 @@ public class OfferEntity {
 
     public void setYear(Integer year) {
         this.year = year;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
     }
 
     public ModelEntity getModel() {

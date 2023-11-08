@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class OfferDTO {
-    private UUID uuid;
     private String description;
     private Engine engine;
     private String imageUrl;
@@ -15,36 +14,9 @@ public class OfferDTO {
     private Float price;
     private Transmission transmission;
     private Integer year;
-    private LocalDateTime created;
-    private LocalDateTime modified;
     private ModelDTO model;
     private UserDTO seller;
-
-    private OfferDTO(UUID uuid, String description, Engine engine, String imageUrl, Integer mileage, Float price, Transmission transmission, Integer year, LocalDateTime created, LocalDateTime modified, ModelDTO model, UserDTO seller) {
-        this.uuid = uuid;
-        this.description = description;
-        this.engine = engine;
-        this.imageUrl = imageUrl;
-        this.mileage = mileage;
-        this.price = price;
-        this.transmission = transmission;
-        this.year = year;
-        this.created = created;
-        this.modified = modified;
-        this.model = model;
-        this.seller = seller;
-    }
-
-    public OfferDTO() {
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
+    private UUID id;
 
     public String getDescription() {
         return description;
@@ -102,22 +74,6 @@ public class OfferDTO {
         this.year = year;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
     public ModelDTO getModel() {
         return model;
     }
@@ -132,5 +88,29 @@ public class OfferDTO {
 
     public void setSeller(UserDTO seller) {
         this.seller = seller;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public OfferDTO() {
+    }
+
+    private OfferDTO(String description, Engine engine, String imageUrl, Integer mileage, Float price, Transmission transmission, Integer year, ModelDTO model, UserDTO seller, UUID id) {
+        this.description = description;
+        this.engine = engine;
+        this.imageUrl = imageUrl;
+        this.mileage = mileage;
+        this.price = price;
+        this.transmission = transmission;
+        this.year = year;
+        this.model = model;
+        this.seller = seller;
+        this.id = id;
     }
 }

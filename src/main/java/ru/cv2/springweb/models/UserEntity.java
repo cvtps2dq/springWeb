@@ -1,47 +1,29 @@
 package ru.cv2.springweb.models;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
+import ru.cv2.springweb.models.abstracts.BaseCMEntity;
+import ru.cv2.springweb.models.abstracts.BaseEntity;
 
 @Entity
-public class UserEntity {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+public class UserEntity extends BaseCMEntity {
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private Boolean isActive;
-
-    private LocalDateTime created;
-    private LocalDateTime modified;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="role_id")
     private UserRoleEntity role;
     private String imageUrl;
 
-    private UserEntity(UUID uuid, String username, String password, String firstName, String lastName, Boolean isActive, LocalDateTime created, LocalDateTime modified, UserRoleEntity role, String imageUrl) {
-        this.uuid = uuid;
+    private UserEntity(String username, String password, String firstName, String lastName, Boolean isActive, UserRoleEntity role, String imageUrl) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.isActive = isActive;
-        this.created = created;
-        this.modified = modified;
         this.role = role;
         this.imageUrl = imageUrl;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getUsername() {
@@ -82,22 +64,6 @@ public class UserEntity {
 
     public void setActive(Boolean active) {
         isActive = active;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
     }
 
     public UserRoleEntity getRole() {

@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class UserDTO {
-
-    private UUID uuid;
     private String username;
     private String password;
     private String firstName;
@@ -14,32 +12,9 @@ public class UserDTO {
 
     private UserRoleDTO role;
     private String imageUrl;
-
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private UUID id;
 
     public UserDTO() {
-    }
-
-    public UserDTO(UUID uuid, String username, String password, String firstName, String lastName, Boolean isActive, UserRoleDTO role, String imageUrl, LocalDateTime created, LocalDateTime modified) {
-        this.uuid = uuid;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.isActive = isActive;
-        this.role = role;
-        this.imageUrl = imageUrl;
-        this.created = created;
-        this.modified = modified;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getUsername() {
@@ -98,19 +73,22 @@ public class UserDTO {
         this.imageUrl = imageUrl;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
+    public UUID getId() {
+        return id;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
+    private UserDTO(String username, String password, String firstName, String lastName, Boolean isActive, UserRoleDTO role, String imageUrl, UUID id) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isActive = isActive;
+        this.role = role;
+        this.imageUrl = imageUrl;
+        this.id = id;
     }
 }

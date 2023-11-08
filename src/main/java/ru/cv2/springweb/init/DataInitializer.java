@@ -8,51 +8,47 @@ import ru.cv2.springweb.models.enums.Category;
 import ru.cv2.springweb.models.enums.Engine;
 import ru.cv2.springweb.models.enums.Role;
 import ru.cv2.springweb.models.enums.Transmission;
-import ru.cv2.springweb.services.*;
+import ru.cv2.springweb.services.impl.*;
 
 import java.time.LocalDateTime;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private final BrandService brandService;
-    private final ModelService modelService;
-    private final OfferService offerService;
-    private final UserService userService;
-    private final UserRoleService userRoleService;
+    private final BrandServiceImpl brandServiceImpl;
+    private final ModelServiceImpl modelServiceImpl;
+    private final OfferServiceImpl offerServiceImpl;
+    private final UserServiceImpl userServiceImpl;
+    private final UserRoleServiceImpl userRoleServiceImpl;
 
     @Autowired
-    public DataInitializer(BrandService brandService, ModelService modelService,
-                           OfferService offerService, UserService userService,
-                           UserRoleService userRoleService) {
-        this.brandService = brandService;
-        this.modelService = modelService;
-        this.offerService = offerService;
-        this.userService = userService;
-        this.userRoleService = userRoleService;
+    public DataInitializer(BrandServiceImpl brandServiceImpl, ModelServiceImpl modelServiceImpl,
+                           OfferServiceImpl offerServiceImpl, UserServiceImpl userServiceImpl,
+                           UserRoleServiceImpl userRoleServiceImpl) {
+        this.brandServiceImpl = brandServiceImpl;
+        this.modelServiceImpl = modelServiceImpl;
+        this.offerServiceImpl = offerServiceImpl;
+        this.userServiceImpl = userServiceImpl;
+        this.userRoleServiceImpl = userRoleServiceImpl;
     }
 
     @Override
     public void run(String... args) {
         BrandDTO brand1 = new BrandDTO();
         brand1.setName("Kia");
-        brand1.setCreated(LocalDateTime.now());
-        brand1.setModified(LocalDateTime.now());
-        brandService.saveBrand(brand1);
+        brandServiceImpl.saveBrand(brand1);
 
         BrandDTO brand2 = new BrandDTO();
         brand1.setName("Hyundai");
-        brand1.setCreated(LocalDateTime.now());
-        brand1.setModified(LocalDateTime.now());
-        brandService.saveBrand(brand2);
+        brandServiceImpl.saveBrand(brand2);
 
         UserRoleDTO userRole1 = new UserRoleDTO();
         userRole1.setRole(Role.User);
-        userRoleService.saveRole(userRole1);
+        userRoleServiceImpl.saveRole(userRole1);
 
         UserRoleDTO userRole2 = new UserRoleDTO();
         userRole2.setRole(Role.Admin);
-        userRoleService.saveRole(userRole2);
+        userRoleServiceImpl.saveRole(userRole2);
 
         UserDTO user1 = new UserDTO();
         user1.setUsername("cv2");
@@ -62,9 +58,7 @@ public class DataInitializer implements CommandLineRunner {
         user1.setActive(true);
         user1.setRole(userRole1);
         user1.setImageUrl("http://example.com/avatar1.jpg");
-        user1.setCreated(LocalDateTime.now());
-        user1.setModified(LocalDateTime.now());
-        userService.saveUser(user1);
+        //userServiceImpl.saveUser(user1);
 
         UserDTO user2 = new UserDTO();
         user2.setUsername("test");
@@ -74,9 +68,7 @@ public class DataInitializer implements CommandLineRunner {
         user2.setActive(true);
         user2.setRole(userRole1);
         user2.setImageUrl("http://example.com/avatar2.jpg");
-        user2.setCreated(LocalDateTime.now());
-        user2.setModified(LocalDateTime.now());
-        userService.saveUser(user2);
+        //userServiceImpl.saveUser(user2);
 
         ModelDTO model1 = new ModelDTO();
         model1.setName("Small SUV");
@@ -84,10 +76,8 @@ public class DataInitializer implements CommandLineRunner {
         model1.setImageUrl("http://example.com/image1.jpg");
         model1.setStartYear(2010);
         model1.setEndYear(2022);
-        model1.setCreated(LocalDateTime.now());
-        model1.setModified(LocalDateTime.now());
         model1.setBrand(brand1);
-        modelService.saveModel(model1);
+        modelServiceImpl.saveModel(model1);
 
         ModelDTO model2 = new ModelDTO();
         model2.setName("Big Truck");
@@ -95,10 +85,8 @@ public class DataInitializer implements CommandLineRunner {
         model2.setImageUrl("http://example.com/image2.jpg");
         model2.setStartYear(2009);
         model2.setEndYear(2070);
-        model2.setCreated(LocalDateTime.now());
-        model2.setModified(LocalDateTime.now());
         model2.setBrand(brand2);
-        modelService.saveModel(model2);
+        modelServiceImpl.saveModel(model2);
 
         // Создание начальных данных для Offer
         OfferDTO offer1 = new OfferDTO();
@@ -109,11 +97,9 @@ public class DataInitializer implements CommandLineRunner {
         offer1.setPrice(100000f);
         offer1.setTransmission(Transmission.Automatic);
         offer1.setYear(2020);
-        offer1.setCreated(LocalDateTime.now());
-        offer1.setModified(LocalDateTime.now());
         offer1.setModel(model1);
         offer1.setSeller(user1);
-        offerService.saveOffer(offer1);
+        offerServiceImpl.saveOffer(offer1);
 
         OfferDTO offer2 = new OfferDTO();
         offer2.setDescription("NEW CAR AVALIABLE!!!11!!!1");
@@ -123,11 +109,9 @@ public class DataInitializer implements CommandLineRunner {
         offer2.setPrice(150000f);
         offer2.setTransmission(Transmission.Manual);
         offer2.setYear(2020);
-        offer2.setCreated(LocalDateTime.now());
-        offer2.setModified(LocalDateTime.now());
         offer2.setModel(model2);
         offer2.setSeller(user2);
-        offerService.saveOffer(offer2);
+        offerServiceImpl.saveOffer(offer2);
 
     }
 }

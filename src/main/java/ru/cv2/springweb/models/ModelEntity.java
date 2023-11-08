@@ -1,25 +1,20 @@
 package ru.cv2.springweb.models;
 
 import jakarta.persistence.*;
+import ru.cv2.springweb.models.abstracts.BaseCMEntity;
+import ru.cv2.springweb.models.abstracts.BaseEntity;
 import ru.cv2.springweb.models.enums.Category;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
-public class ModelEntity {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+public class ModelEntity extends BaseCMEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     private Category category;
     private String imageUrl;
     private Integer startYear;
     private Integer endYear;
-    private LocalDateTime created;
-    private LocalDateTime modified;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="brand_id")
     private BrandEntity brand;
@@ -27,27 +22,16 @@ public class ModelEntity {
     @OneToMany(mappedBy = "model", cascade = CascadeType.PERSIST)
     private List<OfferEntity> offers;
 
-    private ModelEntity(UUID uuid, String name, Category category, String imageUrl, Integer startYear, Integer endYear, LocalDateTime created, LocalDateTime modified, BrandEntity brand) {
-        this.uuid = uuid;
+    private ModelEntity(String name, Category category, String imageUrl, Integer startYear, Integer endYear, BrandEntity brand) {
         this.name = name;
         this.category = category;
         this.imageUrl = imageUrl;
         this.startYear = startYear;
         this.endYear = endYear;
-        this.created = created;
-        this.modified = modified;
         this.brand = brand;
     }
 
     public ModelEntity() {
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getName() {
@@ -88,22 +72,6 @@ public class ModelEntity {
 
     public void setEndYear(Integer endYear) {
         this.endYear = endYear;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
     }
 
     public BrandEntity getBrand() {
