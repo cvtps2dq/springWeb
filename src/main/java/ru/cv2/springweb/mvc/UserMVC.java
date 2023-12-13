@@ -1,5 +1,7 @@
 package ru.cv2.springweb.mvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,13 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/mvc/user")
 public class UserMVC {
-    private final UserService userService;
+    private UserService userService;
 
-    public UserMVC(UserService userService) {
+    public UserMVC() {
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 

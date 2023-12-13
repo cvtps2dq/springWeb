@@ -1,5 +1,6 @@
 package ru.cv2.springweb.mvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,13 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/mvc/offer")
 public class OfferMVC {
-    private final OfferService offerService;
+    private OfferService offerService;
 
-    private OfferMVC(OfferService offerService) {
+    public OfferMVC() {
+
+    }
+    @Autowired
+    public void setOfferService(OfferService offerService) {
         this.offerService = offerService;
     }
 

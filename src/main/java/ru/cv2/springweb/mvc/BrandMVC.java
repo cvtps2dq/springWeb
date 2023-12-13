@@ -1,5 +1,6 @@
 package ru.cv2.springweb.mvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @RequestMapping("/mvc/brand")
 public class BrandMVC {
 
-    private final BrandService brandService;
+    private BrandService brandService;
 
     @GetMapping("/all")
     public String getAll(Model model){
@@ -46,7 +47,11 @@ public class BrandMVC {
         return "addBrand";
     }
 
-    private BrandMVC(BrandService brandService) {
+    public BrandMVC() {
+
+    }
+    @Autowired
+    public void setBrandService(BrandService brandService) {
         this.brandService = brandService;
     }
 }
